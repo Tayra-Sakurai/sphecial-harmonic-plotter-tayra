@@ -1,0 +1,109 @@
+[build-system]
+requires = ["hatchling>=1.31"]
+build-backend = "hatchling.build"
+
+[project]
+name = "Sphecial-Harmonic-Plotter-Tayra"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.13"
+license = "AGPL-3.0-or-later"
+keywords = []
+authors = [
+  { name = "Tayra Sakurai", email = "tayra_sakurai@icloud.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Framework :: Matplotlib",
+  "Framework :: Flake8",
+  "Framework :: Hatch",
+  "Framework :: Sphinx :: Theme",
+  "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Intended Audience :: Education",
+]
+dependencies = [
+  "numpy>=2.5.1",
+  "scipy>=1.18",
+  "pandas>=3.0.3",
+  "matplotlib>=3.11",
+]
+
+[project.optional-dependencies]
+dev = [
+  "scipy_stubs>=1.18",
+  "flake8>=7.3.0",
+  "Sphinx>=9.1",
+  "hatch>=1.17.1",
+  "hatchling>=1.31",
+  "pytest>=9.1.1",
+  "numpydoc>=1.10.0",
+  "pydata_sphinx_theme>=0.19",
+]
+
+[dependency-groups]
+lint = [
+  "scipy_stubs>=1.18",
+  "flake8>=7.3.0",
+]
+dev = [
+  "Sphinx>=9.1",
+  "hatch>=1.17.1",
+  "hatchling>=1.31",
+  "pytest>=9.1.1",
+  "numpydoc>=1.10.0",
+  "pydata_sphinx_theme>=0.19",
+  "twine>=6.2",
+]
+
+[project.urls]
+Documentation = "https://tayra-sakurai.github.io/sphecial-harmonic-plotter-tayra"
+Issues = "https://github.com/Tayra-Sakurai/sphecial-harmonic-plotter-tayra/issues"
+Source = "https://github.com/Tayra-Sakurai/sphecial-harmonic-plotter-tayra"
+
+[tool.hatch.version]
+path = "src/sphecial_harmonic_plotter_tayra/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+
+[tool.hatch.envs.default]
+dependency-groups = [ "dev" ]
+
+[tool.hatch.envs.dev]
+dependency-groups = [ "lint", "dev" ]
+
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/sphecial_harmonic_plotter_tayra tests}"
+
+[tool.hatch.envs.hatch-build]
+installer = "uv"
+
+[tool.coverage.run]
+source_pkgs = ["sphecial_harmonic_plotter_tayra", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/sphecial_harmonic_plotter_tayra/__about__.py",
+]
+
+[tool.coverage.paths]
+sphecial_harmonic_plotter_tayra = ["src/sphecial_harmonic_plotter_tayra", "*/sphecial-harmonic-plotter-tayra/src/sphecial_harmonic_plotter_tayra"]
+tests = ["tests", "*/sphecial-harmonic-plotter-tayra/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[[tool.hatch.envs.hatch-test.matrix]]
+python = ["3.14", "3.13"]
