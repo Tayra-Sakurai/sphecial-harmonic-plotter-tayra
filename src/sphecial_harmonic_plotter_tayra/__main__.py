@@ -9,7 +9,7 @@ def main() -> None:
     )
     parser.add_argument(
         'l',
-        required=False,
+        nargs='?',
         type=int,
         help='The azimuthal quantum number.'
     )

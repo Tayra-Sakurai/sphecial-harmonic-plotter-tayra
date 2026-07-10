@@ -1,7 +1,7 @@
 """Calculates the sphecial harmonic funtions."""
 import numpy as np
 from scipy.special import sph_harm_y
-from typing import Any
+from typing import Any, Iterable
 
 # Constants
 RADIUS = 10.0
@@ -45,7 +45,7 @@ def generate_harmonics_2d(
     theta = np.linspace(0, np.pi)
     phi = np.linspace(0, 2 * np.pi)
     m_l = np.arange(-l, l + 1)
-    harms: _Complex3D = sph_harm_y(n=l, m=m_l, theta=theta, phi=phi)
+    harms: _Complex3D = sph_harm_y(l, m_l, theta, phi)
     points: list[
         _Coord
     ] = []
@@ -60,22 +60,27 @@ def generate_harmonics_2d(
     )
     y_coeff = t_y * p_y
     for i in range(l + 1):
-        f: _Array2D[np.float64]
+        fs: Iterable[_Array2D[np.float64]]
         if i == 0:
             harm: _Complex2D = harms[l]
             f = harm.real
+            fs = (f,)
         else:
             harm: _Complex2D = (harms[l - i] + harms[l + i]) / np.sqrt(2)
-            f = harm.real
-        x: _Array2D[
-            np.float64
-        ] = RADIUS * f * x_coeff
-        y: _Array2D[
-            np.float64
-        ] = RADIUS * f * y_coeff
-        z: _Array2D[
-            np.float64
-        ] = RADIUS * f * np.cos(theta)
-        point: _Coord = x, y, z
-        points.append(point)
+            f1 = harm.real
+            harm2: _Complex2D = (harms[l + i] - harms[l - i]) / np.sqrt(2)
+            f2 = harm2.real
+            fs = f1, f2
+        for fval in fs:
+            x: _Array2D[
+                np.float64
+            ] = RADIUS * fval * x_coeff
+            y: _Array2D[
+                np.float64
+            ] = RADIUS * fval * y_coeff
+            z: _Array2D[
+                np.float64
+            ] = RADIUS * fval * np.cos(theta)
+            point: _Coord = x, y, z
+            points.append(point)
     return tuple(points)

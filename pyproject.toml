@@ -44,7 +44,11 @@ dev = [
   "pytest>=9.1.1",
   "numpydoc>=1.10.0",
   "pydata_sphinx_theme>=0.19",
+  "build>=1.5.1",
 ]
+
+[project.scripts]
+sphecial_harmonic_plotter_tayra = "sphecial_harmonic_plotter_tayra.__main__:main"
 
 [dependency-groups]
 lint = [
@@ -59,6 +63,7 @@ dev = [
   "numpydoc>=1.10.0",
   "pydata_sphinx_theme>=0.19",
   "twine>=6.2",
+  "build>=1.5.1",
 ]
 
 [project.urls]
