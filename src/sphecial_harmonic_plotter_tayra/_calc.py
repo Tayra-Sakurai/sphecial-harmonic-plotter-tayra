@@ -90,7 +90,7 @@ def generate_harmonics_2d(
             for s in (-1, 1):
                 harm_r = (harm_real1 + s * harm_real2) / np.sqrt(2)
                 if s == 1:
-                    harm_r *= 1j
+                    harm_r *= np.complex128(0, 1j)
                 harm_r = harm_r.real
                 harm_r **= 2
                 x = RADIUS * x_coeff * harm_r
