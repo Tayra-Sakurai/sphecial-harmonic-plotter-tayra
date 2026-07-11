@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "Sphecial-Harmonic-Plotter-Tayra"
 dynamic = ["version"]
-description = ''
+description = 'Plotter for spherical harmonic functions as atomic orbital.'
 readme = "README.md"
 requires-python = ">=3.13"
 license = "AGPL-3.0-or-later"

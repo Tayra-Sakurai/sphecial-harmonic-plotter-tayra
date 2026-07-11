@@ -35,8 +35,8 @@ def plot(
     pointsset = generate_harmonics_2d(l)
     ax: Axes3D
     for ax, (point_x, point_y, point_z) in zip(axset, pointsset):
-        ax.set_aspect('equal')
-        ax.plot_surface(point_x, point_y, point_z)
+        ax.set_aspect('equal', adjustable='box')
+        ax.plot_wireframe(point_x, point_y, point_z)
     if save_to is not None:
         plt.savefig(save_to)
     else:
