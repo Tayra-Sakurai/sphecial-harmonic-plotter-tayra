@@ -85,12 +85,12 @@ def generate_harmonics_2d(
             point = x, y, z
             ps.append(point)
         else:
-            harm_real1: _Complex2D = harms.real[i + l]
-            harm_real2: _Complex2D = harms.real[l - i]
+            harm_real1: _Complex2D = harms[i + l]
+            harm_real2: _Complex2D = harms[l - i]
             for s in (-1, 1):
                 harm_r = (harm_real1 + s * harm_real2) / np.sqrt(2)
                 if s == 1:
-                    harm_r *= np.complex128(1j)
+                    harm_r *= 1j
                 harm_r = harm_r.real
                 harm_r **= 2
                 x = RADIUS * x_coeff * harm_r
