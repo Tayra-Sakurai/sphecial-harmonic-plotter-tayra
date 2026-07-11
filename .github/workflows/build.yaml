@@ -1,0 +1,35 @@
+name: Build and Release Python
+
+on:
+  workflow_run:
+    workflows: ["Test Python Package"]
+    types: ["completed"]
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    name: Publish Python package
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    environment:
+      name: pypi
+      url: https://pypi.org/p/Sphecial-Harmonic-Plotter-Tayra
+    permissions:
+      id-token: write
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+
+      - name: Build Python package
+        run: |
+          pip install -U build
+          python -m build
+
+      - name: Publish the package
+        uses: pypa/gh-action-pypi-publish@release/v1

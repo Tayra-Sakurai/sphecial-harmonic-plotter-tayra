@@ -29,12 +29,3 @@ jobs:
         run: pip install -U hatch
       - name: Test the project
         run: hatch test -a
-      - name: Install build package
-        run: pip install -U build
-      - name: Build Python
-        run: python -m build
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: "dist-(${{ matrix.os }}_py${{ matrix.python-version }})"
-          path: dist/*
