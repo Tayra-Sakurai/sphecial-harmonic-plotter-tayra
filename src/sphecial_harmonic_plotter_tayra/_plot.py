@@ -40,7 +40,7 @@ def plot(
         ax.set_xlim(axmin, axmax)
         ax.set_ylim(axmin, axmax)
         ax.set_zlim(axmin, axmax)
-        ax.set_box_aspect(1)
+        ax.set_box_aspect((1, 1, 1))
         ax.plot_wireframe(point_x, point_y, point_z)
     if save_to is not None:
         plt.savefig(save_to)
