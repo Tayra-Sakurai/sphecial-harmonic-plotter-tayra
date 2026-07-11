@@ -2,6 +2,7 @@
 import numpy as np
 from scipy.special import sph_harm_y
 from typing import Any
+import cmath
 
 # Constants
 RADIUS = 10.0
@@ -88,6 +89,8 @@ def generate_harmonics_2d(
             harm_real2: _Complex2D = harms.real[l - i]
             for s in (-1, 1):
                 harm_r = (harm_real1 + s * harm_real2) / np.sqrt(2)
+                if s == 1:
+                    harm_r *= 1j
                 harm_r = harm_r.real
                 harm_r **= 2
                 x = RADIUS * x_coeff * harm_r
