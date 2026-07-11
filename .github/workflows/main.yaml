@@ -23,6 +23,8 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Install pipx if needed
+        run: pip install -U pipx
       - name: Test Python project
         run: pipx run pytest -s
       - name: Build Python
