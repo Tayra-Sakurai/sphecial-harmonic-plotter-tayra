@@ -1,0 +1,33 @@
+name: Test Python package
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**.py'
+  workflow_dispatch:
+
+jobs:
+  setup-and-test:
+    name: Set up and test Python
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        python-version: ['3.13', '3.14']
+        os: ['windows-latest', 'windows-2022', 'macos-latest', 'ubuntu-latest']
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Test Python project
+        run: pipx run pytest -s
+      - name: Build Python
+        run: pipx run build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          path: dist/*

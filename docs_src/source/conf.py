@@ -9,7 +9,7 @@
 project = 'SHPlotter'
 copyright = '2026, Tayra Sakurai'
 author = 'Tayra Sakurai'
-release = '0.2.5'
+release = '0.2.6'
 
 import sys
 from pathlib import Path
