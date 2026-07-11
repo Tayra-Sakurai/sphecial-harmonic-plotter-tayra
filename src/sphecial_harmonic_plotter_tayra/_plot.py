@@ -26,12 +26,13 @@ def plot(
         The function saves the file if this parameter is handled.
     """
     axset: _Array1D[Any]
-    (_, axset) = plt.subplots(
+    (fig, axset) = plt.subplots(
         2 * l + 1,
         subplot_kw={
             'projection': '3d',
         }
     )
+    fig.set_size_inches(10, 11 * (2 * l + 1))
     pointsset = generate_harmonics_2d(l)
     ax: Axes3D
     for ax, (point_x, point_y, point_z) in zip(axset, pointsset):
@@ -40,6 +41,9 @@ def plot(
         ax.set_xlim(axmin, axmax)
         ax.set_ylim(axmin, axmax)
         ax.set_zlim(axmin, axmax)
+        ax.set_xlabel('$x$')
+        ax.set_ylabel('$y$')
+        ax.set_zlabel('$z$')
         ax.set_box_aspect((1, 1, 1))
         ax.plot_wireframe(point_x, point_y, point_z)
     if save_to is not None:

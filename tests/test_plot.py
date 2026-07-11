@@ -3,5 +3,5 @@ from src.sphecial_harmonic_plotter_tayra import plot
 
 
 def test_plotter_type():
-    plot(1, 'test.png')
+    plot(1, 'test.pdf')
     assert True
